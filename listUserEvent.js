@@ -1,4 +1,4 @@
-var host = "https://13.215.191.136";
+var host = "https://13.251.156.7";
 var limit = 5;
 var pagination = document.getElementById("pagination");
 var bodyTable = document.getElementById("body-list-user");
