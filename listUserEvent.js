@@ -1,4 +1,4 @@
-var host = "https://localhost:3000";
+var host = "https://13.213.68.138";
 var limit = 5;
 var pagination = document.getElementById("pagination");
 var bodyTable = document.getElementById("body-list-user");

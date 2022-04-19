@@ -21,7 +21,7 @@
     <script>
         var token = localStorage.getItem('token');
         if (!token)
-            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="/client/login.html">login here</a>'
+            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="login.html">login here</a>'
         else
             document.getElementById('header').innerHTML = `<p class='text-danger'>Admin role <p>`
     </script>
@@ -39,32 +39,32 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>Event A</td>
-                    <td><a href="/client/event-a.html">link</a></td>
+                    <td><a href="event-a.html">link</a></td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
                     <td>Event B</td>
-                    <td><a href="/client/event-b.html">link</a></td>
+                    <td><a href="event-b.html">link</a></td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
                     <td>List user in Event A (list, delete: public and update : admin) </td>
-                    <td><a href="/client/listUserEventA.html">link</a></td>
+                    <td><a href="listUserEventA.html">link</a></td>
                 </tr>
                 <tr>
                     <th scope="row">4</th>
                     <td>List user in Event B (list, delete: public and update : admin) </td>
-                    <td><a href="/client/listUserEventB.html">link</a></td>
+                    <td><a href="listUserEventB.html">link</a></td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
                     <td>Login (get JWT) </td>
-                    <td><a href="/client/login.html">link</a></td>
+                    <td><a href="login.html">link</a></td>
                 </tr>
                 <tr>
                     <th scope="row">6</th>
                     <td>Get event by email (Private page) </td>
-                    <td><a href="/client/getEventByEmail.html">link</a></td>
+                    <td><a href="getEventByEmail.html">link</a></td>
                 </tr>
             </tbody>
         </table>

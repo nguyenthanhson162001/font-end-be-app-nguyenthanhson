@@ -1,4 +1,4 @@
-var url = "https://13.213.68.138:3000";
+var url = "https://13.213.68.138";
 var lastName = document.getElementById("lastName");
 var firstName = document.getElementById("firstName");
 var email = document.getElementById("email");
