@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light" id="header">
+
+    </nav>
+
+    <script>
+        var token = localStorage.getItem('token');
+        if (!token)
+            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="/client/login.html">login here</a>'
+        else
+            document.getElementById('header').innerHTML = `<p class='text-danger'>Admin role <p>`
+    </script>
+    <div class=" container text-center shadow p-3 mb-5 bg-white rounded">
+        <div class="title mt-4">
+            <h1> List user register event A</h1>
+        </div>
+        <div id="error" class="alert alert-danger mt-4 mb-3 d-none" role="alert">
+            <h4 class="alert-heading">Error</h4>
+            <p class="mb-0">Some thing</p>
+        </div>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">Hobbies</th>
+                    <th scope="col">Work location</th>
+                    <th scope="col " colspan="2">action</th>
+                </tr>
+            </thead>
+            <tbody id="body-list-user">
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" id='pagination'>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    </div>
+    <button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" id="btn-modal"
+        data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="row p-4 " id="formModal">
+                        <div class="col-12">
+                            <div class="form-group text-left">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    aria-describedby="helpId" required placeholder="">
+                                <small id="helpEmail" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group text-left">
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName"
+                                    aria-describedby="helpId" required placeholder="">
+                                <small id="helpLastName" class="form-text text-danger"></small>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="workLocation">Work Location </label>
+                                <input type="text" class="form-control" name="workLocation" id="workLocation"
+                                    aria-describedby="helpId" placeholder="">
+                                <small id="workLocation" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group text-left">
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName"
+                                    aria-describedby="helpId" required placeholder="">
+                                <small id="helpFirstName" class="form-text text-danger"></small>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="hobbies">hobbies</label>
+                                <input type="text" class="form-control" name="hobbies" id="hobbies"
+                                    aria-describedby="helpId" placeholder="">
+                                <small id="workHobbies" class="form-text text-danger"></small>
+                            </div>
+                        </div>
+                        <input type="text" name="" id="userId" style="display: none;">
+                        <div class=" col-12 text-right mr-4 mb-2">
+                            <button type="submit" class="btn btn-primary ">Update</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>var eventId = '625acb527f75cb389482f4d3';</script>
+    <script src="./listUserEvent.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

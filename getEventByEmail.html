@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light" id="header">
+
+    </nav>
+
+    <script>
+        var token = localStorage.getItem('token');
+        if (!token)
+            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="/client/login.html">login here</a>'
+        else
+            document.getElementById('header').innerHTML = `<p class='text-danger'>Admin role <p>`
+    </script>
+    <div class=" container text-center shadow p-3 mb-5 bg-white rounded" style="max-width: 500px;">
+        <div class="title mt-4">
+            <h3>Get event by email </h3>
+        </div>
+        <div id="error" class="alert alert-danger mt-4 mb-3 d-none" role="alert">
+            <h4 class="error-heading">Error</h4>
+            <p class="mb-0">Some thing</p>
+        </div>
+        <div class="row p-4 " id="formEventB">
+            <form class="col-12" id="formEmail">
+                <div class="form-group text-left">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" required
+                        placeholder="">
+                    <small id="helpEmail" class="form-text text-danger"></small>
+                </div>
+                <div class=" col-12 text-right mr-4">
+                    <button type="submit" class="btn btn-primary ">Get</button>
+                </div>
+            </form>
+            <div class="info">
+                <div class="d-flex">
+                    <span style="min-width: 100px; text-align: left;">Last name: </span> <b id="lastName"
+                        class="ml-3"></b>
+                </div>
+                <div class="d-flex">
+                    <span style="min-width: 100px; text-align: left;">First name: </span> <b id="firstName"
+                        class="ml-3"></b>
+                </div>
+                <div class="d-flex">
+                    <span style="min-width: 100px; text-align: left;">hobbies: </span> <b id="hobbies" class="ml-3"></b>
+                </div>
+                <div class="d-flex mb-4">
+                    <span style="min-width: 100px; text-align: left;">Work location: </span> <b id="workLocation"
+                        class="ml-3"></b>
+                </div>
+            </div>
+
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Event name</th>
+                        <th scope="col">Event ID</th>
+                    </tr>
+                </thead>
+                <tbody id="list-events">
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        var host = 'https://localhost:3000'
+        var lastName = document.getElementById('lastName')
+        var firstName = document.getElementById('firstName')
+        var hobbies = document.getElementById('hobbies')
+        var workLocation = document.getElementById('workLocation')
+
+        var email = document.getElementById('email')
+        var form = document.getElementById('formEmail')
+        var token = localStorage.getItem('token');
+        var errorHeading = document.querySelector("#error h4");
+        var errorSub = document.querySelector("#error p");
+
+        var listEvents = document.getElementById('list-events')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            fetchRegisterEvent(email.value);
+        })
+
+        const fetchRegisterEvent = (email) => {
+            fetch(`${host}/account/get-list-event-register?email=${email}`, {
+                method: "GET", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": token
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (!data.status) {
+                        errorHeading.innerText = "Error";
+                        errorSub.innerText = data.error.message;
+                        errorHeading.parentElement.className = "alert alert-danger mt-4 mb-3";
+                        lastName.innerHTML = ''
+                        firstName.innerHTML = ''
+                        hobbies.innerHTML = ''
+                        workLocation.innerHTML = ''
+                        listEvents.innerHTML = ''
+                        return;
+                    }
+                    var user = data.result.user
+                    lastName.innerHTML = user.lastName
+                    firstName.innerHTML = user.firstName
+                    hobbies.innerHTML = user.hobbies || 'Don\'t know'
+                    workLocation.innerHTML = user.workLocation || 'Don\'t know'
+                    var index = 1;
+                    listEvents.innerHTML = user.eventId.map(e => {
+                        return `
+                        <tr>
+                        <th scope="row">${index++}</th>
+                        <td>${e.eventName}</td>
+                        <td>${e._id}</td>
+                        </tr>
+                        `
+                    }).join(' ')
+                    errorHeading.innerText = "Success";
+                    errorSub.innerText = "";
+                    errorHeading.parentElement.className = "alert alert-success mt-4 mb-3";
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    errorHeading.innerText = "Error";
+                    errorSub.innerText = error;
+                    errorHeading.parentElement.className = "alert alert-danger mt-4 mb-3";
+                });
+        };
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
