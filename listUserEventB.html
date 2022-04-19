@@ -21,7 +21,7 @@
     <script>
         var token = localStorage.getItem('token');
         if (!token)
-            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="/client/login.html">login here</a>'
+            document.getElementById('header').innerHTML = '<a class="navbar-brand text-primary" href="login.html">login here</a>'
         else
             document.getElementById('header').innerHTML = `<p class='text-danger'>Admin role <p>`
     </script>
